@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT 流量安排器</title>
+  <style>
+    :root{--ink:#edf8f2;--paper:#061817;--panel:#0d2b29;--line:#29504b;--lime:#b8f25b;--muted:#b1c6c0}*{box-sizing:border-box}body{position:relative;isolation:isolate;margin:0;background:#061817;color:var(--ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.45}body::before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(2,13,10,.5),rgba(2,13,10,.68)),url('./assets/digital-rain-background.png') center/cover no-repeat;filter:saturate(.7) brightness(.75);opacity:.88;z-index:0;pointer-events:none}.page{position:relative;z-index:1;max-width:900px;margin:auto;padding:30px 18px}h1{display:flex;align-items:center;gap:12px;font-size:clamp(27px,4vw,40px);line-height:1.1;letter-spacing:-.05em;margin:0 0 6px}.title-mascot{width:82px;height:82px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(184,242,91,.5))}p{margin:0;color:var(--muted)}.steps,.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{margin-top:18px;background:rgba(13,43,41,.87);border:1px solid rgba(90,137,126,.68);backdrop-filter:blur(12px);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.34)}h2{font-size:17px;margin:0 0 5px}.choices{display:grid;gap:7px;margin-top:13px}.choice{width:100%;text-align:left;border:2px solid var(--line);border-radius:10px;background:rgba(18,54,51,.9);padding:11px 13px;color:var(--ink);font-weight:800;font-size:15px;transition:.18s ease}.choice:nth-child(1){border-color:#66d19e}.choice:nth-child(2){border-color:#66b8ff}.choice:nth-child(3){border-color:#f0cc62}.choice:nth-child(4){border-color:#ff9e59}.choice:nth-child(5){border-color:#f26e6e}.choice.selected{background:#285747!important;border-color:#d4ff7d!important;box-shadow:0 0 0 2px rgba(184,242,91,.3),0 0 16px rgba(184,242,91,.52);transform:translateY(-1px)}.choice:hover,.choice:focus{border-color:var(--lime);background:#19443d;outline:none}.choice small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:2px}.result{margin-top:18px;background:rgba(3,17,16,.9);color:#fff;border:1px solid #3b7163;backdrop-filter:blur(12px);border-radius:16px;padding:18px;display:none}.result.show{display:block}.level{color:var(--lime);font-size:12px;font-weight:800;letter-spacing:.08em}.urgency{margin:9px 0 13px;border-radius:8px;padding:8px 10px;font-weight:800}.result h2{font-size:18px;margin:4px 0 10px}.result h3{font-size:16px;color:var(--lime);margin:0 0 7px}.result ul{margin:0;padding-left:19px}.result li{margin:5px 0}.plan-box{background:rgba(11,38,36,.86);border:1px solid #29504b;border-radius:10px;padding:13px}.avoid{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.22);color:#d0ded9;font-size:14px}@media(max-width:640px){.page{padding:24px 14px}.steps,.plans-grid{grid-template-columns:1fr}.card{padding:16px}.choice{font-size:15px}}
+  </style>
+  <style>
+    :root{--ink:#70e6ff}
+    h1{font-size:clamp(34px,5vw,54px)!important;font-weight:900;text-shadow:0 0 16px rgba(85,231,255,.5),0 0 34px rgba(118,244,160,.25)}
+    h1 span{background:linear-gradient(90deg,#73edff 0%,#b8f25b 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .intro-copy{display:inline-block;margin-top:3px;padding:8px 12px;border:1px solid rgba(112,230,255,.48);border-radius:9px;background:rgba(5,34,35,.62);color:#9cecff;font-weight:800;text-shadow:0 0 8px rgba(57,207,255,.48);box-shadow:0 0 18px rgba(68,228,255,.12)}
+    .choice:nth-child(1){color:#77f3a7;text-shadow:0 0 7px rgba(88,238,151,.55)}
+    .choice:nth-child(2){color:#b2f47a;text-shadow:0 0 7px rgba(178,244,122,.45)}
+    .choice:nth-child(3){color:#ffe36e;text-shadow:0 0 7px rgba(255,227,110,.5)}
+    .choice:nth-child(4){color:#ff9d00;text-shadow:0 0 8px rgba(255,130,0,.68)}
+    .choice:nth-child(5){color:#ff6868;text-shadow:0 0 8px rgba(255,75,75,.68)}
+    .urgency-level-1 .plan-box:first-child h2,.urgency-level-1 .plan-box:first-child li,.urgency-level-2 .plan-box:first-child h2,.urgency-level-2 .plan-box:first-child li,.urgency-level-3 .plan-box:first-child h2,.urgency-level-3 .plan-box:first-child li{color:#70e6ff;text-shadow:0 0 8px rgba(50,203,255,.7)}
+    .urgency-level-4 .plan-box:first-child h2,.urgency-level-4 .plan-box:first-child li{color:#ff9d00;text-shadow:0 0 8px rgba(255,130,0,.78)}
+    .urgency-level-5 .plan-box:first-child h2,.urgency-level-5 .plan-box:first-child li{color:#ff70b7;text-shadow:0 0 8px rgba(255,62,160,.72)}
+    .urgency-level-4 .urgency{color:#ffd08a;text-shadow:0 0 8px rgba(255,130,0,.78)}
+    .urgency-level-5 .urgency{color:#ffd0e7;text-shadow:0 0 8px rgba(255,62,160,.72)}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1><img class="title-mascot" src="./assets/chatgpt-flow-mascot.png" alt="可愛 AI 助手"><span>ChatGPT 流量安排器</span></h1>
+    <p class="intro-copy">各選一次 5 小時與每週額度；系統會依較少的一個安排工作。</p>
+    <div class="steps">
+    <section class="card">
+      <h2>⏱️ 第 1 步：5 小時額度</h2>
+      <p>選最接近的比例。</p>
+      <div class="choices" id="shortChoices">
+        <button class="choice" data-short="1">很夠（80% 以上）</button><button class="choice" data-short="2">還夠（60%～79%）</button><button class="choice" data-short="3">普通（40%～59%）</button><button class="choice" data-short="4">不多（20%～39%）</button><button class="choice" data-short="5">很少（19% 以下）</button>
+      </div>
+    </section>
+    <section class="card">
+      <h2>📅 第 2 步：每週額度</h2>
+      <p>選最接近的比例。</p>
+      <div class="choices" id="weekChoices">
+        <button class="choice" data-week="1">很夠（80% 以上）</button><button class="choice" data-week="2">還夠（60%～79%）</button><button class="choice" data-week="3">普通（40%～59%）</button><button class="choice" data-week="4">不多（20%～39%）</button><button class="choice" data-week="5">很少（19% 以下）</button>
+      </div>
+    </section>
+    </div>
+    <section class="card result" id="result"></section>
+  </main>
+  <script>
+    const plans={
+      1:{title:'今天安排：先完成最難、最重要的工作',items:['主管：年度規劃、經營分析、完整簡報','財務／資料：大型報表、預算或異常趨勢分析','行銷／業務：提案、競品研究、客戶策略','人資／行政：制度文件、教育訓練教材','專案／採購：專案計畫、多份文件整合'],avoid:'完成一項大型工作後，再開始下一項。'},
+      2:{title:'今天安排：完成重要日常工作',items:['主管：月報、部門 KPI、工作會議簡報','業務／客服：客戶提案、重要回覆、案件摘要','財務／採購：請款、報價或合約重點整理','人資／行政：職缺資料、公告、教育安排','行銷／專案：活動規劃、專案進度、內容草稿'],avoid:'先完成手上工作，暫時不要開太多新專案。'},
+      3:{title:'今天安排：處理必要的一般工作',items:['行政：會議紀錄、週報、文件校對','業務／客服：一般 Email、客戶問題回覆','主管／專案：待辦整理、進度更新','財務／採購：小型資料整理、單據說明','人資／行銷：通知文案、社群貼文初稿'],avoid:'大型分析或長篇文件，先排到額度較充足時再做。'},
+      4:{title:'今天安排：只處理今天必交的事',items:['所有部門：今天必須交付的文件','業務／客服：緊急客戶回覆','主管：臨時交辦與重要錯誤修正','財務／採購：到期付款、報價或合約急件','人資／行政：當日公告或必須回覆事項'],avoid:'不要做研究、長文件或新的大型專案。'},
+      5:{title:'今天安排：先不使用 AI 做大工作',items:['行政／專案：整理待辦、蒐集資料、排明日工作','所有部門：人工審閱已完成的文件','業務／行銷：整理客戶或素材，暫不產生新內容','財務／人資：確認資料完整性與需補資料項目'],avoid:'除非是今天不能延後的急件，否則先等待額度重設。'}
+    };
+    const weekPlans={1:['週一至週二：安排大型分析、提案或跨部門文件','週三：集中處理重要報告與資料驗證','週四至週五：保留時間給修改、會議與臨時急件'],2:['本週先完成既有的重要工作，不新增大型專案','每天保留一段時間處理客戶、主管或跨部門回覆','週五整理進度與下週待辦'],3:['本週以會議紀錄、Email、例行報表與文件修改為主','大型工作只先列大綱或蒐集資料，留待額度較多時','每天只安排一項需要 AI 協助的重點工作'],4:['本週只處理有明確交期的工作','其他分析、研究、長文件與新企劃全部延後','每天先確認急件，再決定是否使用 AI'],5:['本週以人工整理、審閱與資料蒐集為主','建立下次可直接使用的提示詞與工作清單','等待額度重設後再安排 AI 協助的工作']};
+    const urgency={1:{text:'🟢 不急｜可安排深度或大型工作',color:'#173e31'},2:{text:'🔵 一般｜優先完成重要日常工作',color:'#17354b'},3:{text:'🟡 優先｜先完成必要的一般工作',color:'#4b4215'},4:{text:'🟠 急件｜只處理有明確交期的工作',color:'#51331b'},5:{text:'🔴 很急｜僅保留給無法延後的急件',color:'#4d2022'}};
+    let shortLevel=null,weekLevel=null;
+    function choose(group,value,button){document.querySelectorAll(`#${group} .choice`).forEach(x=>x.classList.remove('selected'));button.classList.add('selected');if(group==='shortChoices')shortLevel=value;else weekLevel=value;if(shortLevel&&weekLevel){const active=Math.max(shortLevel,weekLevel),p=plans[active],u=urgency[active],r=document.getElementById('result');r.innerHTML=`<div class="level">🎯 工作安排｜今日採用較少的額度</div><div class="urgency" style="background:${u.color}">${u.text}</div><div class="plans-grid"><section class="plan-box"><h3>📌 今天工作安排</h3><h2>${p.title}</h2><ul>${p.items.map(x=>`<li>${x}</li>`).join('')}</ul><div class="avoid">⚠️ ${p.avoid}</div></section><section class="plan-box"><h3>📅 本週工作安排</h3><ul>${weekPlans[weekLevel].map(x=>`<li>${x}</li>`).join('')}</ul></section></div>`;r.className=`card result show urgency-level-${active}`;r.scrollIntoView({behavior:'smooth',block:'nearest'});}}
+    document.querySelectorAll('[data-short]').forEach(b=>b.addEventListener('click',()=>choose('shortChoices',+b.dataset.short,b)));
+    document.querySelectorAll('[data-week]').forEach(b=>b.addEventListener('click',()=>choose('weekChoices',+b.dataset.week,b)));
+  </script>
+</body>
+</html>
