@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 檢討｜2027 目標｜重點儀表板</title>
+<style>
+  :root{--ink:#073b4c;--muted:#52636b;--line:#dce5e6;--blue:#1677a8;--blue2:#e4f3f8;--green:#087f73;--green2:#dff5ee;--amber:#e58b21;--amber2:#fff1d7;--red:#b84b37;--red2:#fbe5de;--paper:#f3f5f3;--white:#fff;--deep:#063d4b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Heiti TC","Microsoft JhengHei","Noto Sans TC",sans-serif;font-size:20px;font-weight:800;line-height:1.45}
+  .wrap{max-width:1500px;margin:auto;padding:0 34px 50px}
+  header{margin:0 -34px 22px;padding:48px 68px 36px;display:flex;justify-content:space-between;gap:24px;align-items:flex-end;background:linear-gradient(90deg,#10303d 0%,#123441 100%);color:#fff}
+  h1{font-size:clamp(36px,4vw,64px);line-height:1.05;margin:0 0 8px;font-weight:950;letter-spacing:.03em}
+  h2{font-size:30px;margin:0 0 16px;line-height:1.15;font-weight:950}
+  h3{font-size:24px;margin:0 0 8px;font-weight:900}
+  .sub{font-size:24px;color:#dceff0;font-weight:700}
+  .date{text-align:right;color:#e7f5f4;font-size:18px;white-space:nowrap}
+  .hero-subline{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.creator{display:block;width:max-content;margin:16px 0 0 auto;color:#fff;text-align:left;font-size:12pt;line-height:1.1;font-weight:950;letter-spacing:.01em;padding:0 1cm 7px 0;border-bottom:2px solid #e7f5f4;white-space:nowrap;text-shadow:0 .3px 0 currentColor;transform:translateX(1cm)}
+  .hero-brand{display:flex;align-items:flex-start;gap:24px}.hero-logo{width:220px;height:auto;object-fit:contain;flex:0 0 auto;transform:translateY(-0.3cm)}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.hero-tag{border:1px solid #a5d0d1;border-radius:999px;padding:8px 16px;color:#fff;font-size:17px;font-weight:800}
+  .topnav{position:sticky;top:0;z-index:10;background:#f3f5f3dd;backdrop-filter:blur(9px);padding:10px 0 13px;margin:0 0 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}.topnav a{color:var(--ink);text-decoration:none;font-weight:900;padding:8px 13px;border-radius:999px}.topnav a:hover{background:#dceceb}.search{flex:1 1 250px;min-width:220px;padding:12px 16px;border:1px solid #c9d5d7;border-radius:12px;font:inherit;background:#fff;color:var(--ink)}
+  .grid{display:grid;gap:18px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:20px}.two{grid-template-columns:1.08fr .92fr}.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{background:var(--white);border:1px solid #d1dfe1;border-radius:22px;padding:22px;box-shadow:0 8px 0 #c6d5d7,0 15px 28px #16434a22;transform:translateY(0) rotateX(0deg);transform-style:preserve-3d;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;will-change:transform;cursor:pointer;font-weight:800}
+  .card:hover,.card.is-hovered{transform:translateY(-5px) rotateX(.6deg) scale(1.005);box-shadow:0 10px 0 #b7c9cc,0 20px 30px #16434a30;border-color:#7eafb4}
+  .card,.card p,.card td,.card th,.card .muted,.card .note,.card .label,.card .callout{font-weight:850;font-synthesis:weight;text-shadow:0 .15px 0 currentColor}
+  .card h2,.card h3,.kpi .value,.big-number{font-weight:950;text-shadow:0 .25px 0 currentColor}
+  .card:hover,.card.is-hovered{color:#052f3c}
+  .card:hover h2,.card:hover h3,.card:hover .value,.card:hover .big-number,.card:hover .label,.card:hover .note,.card:hover .muted,.card:hover p,.card:hover td,.card:hover th,.card:hover .callout,.card.is-hovered h2,.card.is-hovered h3,.card.is-hovered .value,.card.is-hovered .big-number,.card.is-hovered .label,.card.is-hovered .note,.card.is-hovered .muted,.card.is-hovered p,.card.is-hovered td,.card.is-hovered th,.card.is-hovered .callout{font-weight:950 !important;letter-spacing:.01em;text-shadow:0 .35px 0 currentColor;-webkit-text-stroke:.12px currentColor}
+  .kpi{min-height:145px}.kpi .label{font-size:19px;color:var(--muted);font-weight:800}.kpi .value{font-size:38px;line-height:1.1;font-weight:900;margin:7px 0}.kpi .note{font-size:18px;color:var(--muted)}
+  .blue{border-top:8px solid var(--blue)}.green{border-top:8px solid var(--green)}.amber{border-top:8px solid var(--amber)}.red{border-top:8px solid var(--red)}
+  .section{margin:20px 0}.section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:12px}.section-title small{font-size:17px;color:var(--muted);font-weight:950}
+  .metric-row{display:grid;grid-template-columns:150px 1fr 110px;gap:14px;align-items:center;margin:17px 0;font-weight:800}.bar{height:28px;background:#e7ebf1;border-radius:999px;overflow:hidden}.fill{height:100%;border-radius:999px;background:var(--blue)}.fill.greenfill{background:var(--green)}.fill.amberfill{background:#e99a00}.pct{text-align:right;font-size:24px}
+  .callout{padding:16px 18px;border-radius:13px;background:var(--amber2);border-left:7px solid var(--amber);font-weight:800;margin-top:16px}.callout.redbox{background:var(--red2);border-left-color:var(--red)}
+  table{width:100%;border-collapse:collapse;font-size:19px;font-weight:700}th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th:first-child,td:first-child{text-align:left}th{background:#f0f3f7;font-size:18px;font-weight:900}td strong{font-size:22px;font-weight:950}
+  .tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:16px;font-weight:900}.tag.ok{background:var(--green2);color:var(--green)}.tag.warn{background:var(--amber2);color:var(--amber)}
+  .big-number{font-size:48px;font-weight:900;line-height:1.05}.muted{color:var(--muted)}.foot{font-size:16px;color:var(--muted);margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+  @media(max-width:1000px){.kpis,.three,.two{grid-template-columns:1fr 1fr}.metric-row{grid-template-columns:120px 1fr 90px}}
+  @media(max-width:650px){body{font-size:18px}.wrap{padding:0 16px 35px}.kpis,.three,.two{grid-template-columns:1fr}header{display:block;margin:0 -16px 18px;padding:34px 24px 28px}.hero-brand{display:block}.hero-logo{width:170px;margin-bottom:22px}.date{text-align:left;margin-top:12px}.metric-row{grid-template-columns:105px 1fr 75px;gap:8px}.pct{font-size:20px}table{font-size:16px;display:block;overflow-x:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="hero-brand"><img class="hero-logo" src="tbc-logo.png" alt="彬台科技股份有限公司 TBC 標誌"><div><div class="hero-subline"><div class="sub">TBC · MANAGEMENT REVIEW｜彬台｜台北業務部</div></div><h1>2026 年終經營檢討<br>2027 目標儀表板</h1><div class="hero-tags"><span class="hero-tag">營收與毛利</span><span class="hero-tag">接單與機會池</span><span class="hero-tag">管理決策摘要</span></div></div></div>
+    <div class="date">原簡報日期：2026/11/19<br>金額單位：NT$<br><span class="creator">製作 Grace Li</span></div>
+  </header>
+  <nav class="topnav" aria-label="儀表板導覽"><input class="search" id="search" type="search" placeholder="搜尋摘要、指標或行動…"><a href="#summary">總覽</a><a href="#targets">目標</a><a href="#signals">訊號</a><a href="#business">業務</a><a href="#actions">管理重點</a></nav>
+
+  <section id="summary" class="grid kpis">
+    <div class="card kpi blue"><div class="label">2026 年 1–10 月接單業績</div><div class="value">2.953 億</div><div class="note">年度目標 8.80 億｜達成 33.56%</div></div>
+    <div class="card kpi green"><div class="label">2026 年 1–10 月預估毛利</div><div class="value">6,145 萬</div><div class="note">年度目標 9,135 萬｜達成 67.27%</div></div>
+    <div class="card kpi amber"><div class="label">2026 年 1–12 月預估</div><div class="value">9.603 億</div><div class="note">預估毛利 1.480 億｜營收達成 109.13%｜毛利達成 162.01%</div></div>
+    <div class="card kpi red"><div class="label">2027 年公司目標</div><div class="value">8.00 億</div><div class="note">毛利目標 8,300 萬</div></div>
+  </section>
+
+  <section id="targets" class="grid two section">
+    <div class="card">
+      <div class="section-title"><h2>📈 2026 年度目標進度</h2><small>1–10 月實績 vs 年度目標</small></div>
+      <div class="metric-row"><span>營收</span><div class="bar"><div class="fill" style="width:33.56%"></div></div><span class="pct">33.56%</span></div>
+      <div class="metric-row"><span>毛利</span><div class="bar"><div class="fill greenfill" style="width:67.27%"></div></div><span class="pct">67.27%</span></div>
+      <div class="metric-row"><span>代理接單</span><div class="bar"><div class="fill amberfill" style="width:5.05%"></div></div><span class="pct">5.05%</span></div>
+      <div class="callout">11 月接單 1,101.9 萬後，1–11 月累計營收 3.063 億、達成 34.81%；預估 1–12 月營收 9.603 億、毛利 1.480 億。</div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h2>🎯 2027 目標配置</h2><small>依原簡報分部表</small></div>
+      <table><thead><tr><th>業務單位</th><th>營收目標</th><th>毛利目標</th></tr></thead><tbody>
+        <tr><td>業務 1</td><td><strong>2.20 億</strong></td><td>2,745 萬</td></tr>
+        <tr><td>業務 2</td><td><strong>3.15 億</strong></td><td>2,790 萬</td></tr>
+        <tr><td>業務 3</td><td><strong>2.10 億</strong></td><td>2,195 萬</td></tr>
+        <tr><td>TBT／TBI</td><td>5,500 萬</td><td>570 萬</td></tr>
+      </tbody></table>
+      <div class="callout">分部表營收合計約 8.00 億，與公司總目標一致：2.20＋3.15＋2.10＋0.55 億。</div>
+    </div>
+  </section>
+
+  <section id="signals" class="grid three section">
+    <div class="card"><h2>客戶集中度</h2><div class="big-number">35.69%</div><div class="muted">2026 年最大客戶營收占比</div><div class="metric-row"><span>2025 最大客戶</span><div class="bar"><div class="fill amberfill" style="width:71.1%"></div></div><span class="pct">71.10%</span></div><div class="metric-row"><span>2026 最大客戶</span><div class="bar"><div class="fill greenfill" style="width:35.69%"></div></div><span class="pct">35.69%</span></div><span class="tag ok">集中風險下降</span></div>
+    <div class="card"><h2>費用使用率</h2><div class="big-number">78.56%</div><div class="muted">2026 年 1–10 月實際費用／預算</div><div class="metric-row"><span>已使用</span><div class="bar"><div class="fill amberfill" style="width:78.56%"></div></div><span class="pct">2,448 萬</span></div><div class="callout">原簡報指出，主要費用集中於業務、年終獎金、差旅、保險與禮品等項目。</div></div>
+    <div class="card"><h2>專案機會池</h2><div class="big-number">11.05 億</div><div class="muted">依 2026–2027 專案清單各頁小計加總</div><div class="metric-row"><span>預估毛利</span><div class="bar"><div class="fill greenfill" style="width:15.87%"></div></div><span class="pct">1.754 億</span></div><span class="tag warn">清單型預估，非確認訂單</span></div>
+  </section>
+
+  <section id="business" class="card section">
+    <div class="section-title"><h2>2026 年 1–10 月業務單位檢視</h2><small>營收達成率／毛利達成率</small></div>
+    <table><thead><tr><th>業務單位</th><th>營收目標</th><th>營收實績</th><th>營收達成</th><th>毛利目標</th><th>毛利實績</th><th>毛利達成</th></tr></thead><tbody>
+      <tr><td>業務 1</td><td>2.00 億</td><td>9,194 萬</td><td><span class="tag warn">45.97%</span></td><td>2,740 萬</td><td>2,310 萬</td><td><span class="tag ok">84.31%</span></td></tr>
+      <tr><td>業務 2</td><td>4.50 億</td><td>1.706 億</td><td><span class="tag warn">37.92%</span></td><td>3,690 萬</td><td>2,468 萬</td><td><span class="tag warn">66.87%</span></td></tr>
+      <tr><td>業務 3</td><td>1.75 億</td><td>3,834 萬</td><td><span class="tag warn">21.91%</span></td><td>2,155 萬</td><td>1,297 萬</td><td><span class="tag warn">60.19%</span></td></tr>
+    </tbody></table>
+  </section>
+
+  <section id="actions" class="grid two section">
+    <div class="card"><h2>管理重點</h2><table><tbody>
+      <tr><td>毛利進度</td><td>1–10 月毛利達成率 67.27%，明顯高於營收達成率 33.56%。</td></tr>
+      <tr><td>營收缺口</td><td>2027 年目標需拆解至業務、客戶與季度，並與機會池逐案對應。</td></tr>
+      <tr><td>客戶結構</td><td>最大客戶占比由 2025 年 71.10% 降至 2026 年 35.69%。</td></tr>
+      <tr><td>費用控管</td><td>費用執行率 78.56%，需搭配年末預估與 2027 預算檢視。</td></tr>
+    </tbody></table></div>
+    <div class="card"><h2>資料界線</h2><p>本頁只整理原簡報中的數字與文字，不把專案清單預估視為已確認訂單。</p><p>「預估」「機會池」「待確認」代表原資料仍需由業務或管理者確認，尤其是 2027 分部目標與公司總目標的差異。</p><div class="callout">建議下一步：確認目標口徑、逐案標記商機階段，並補上負責人與季度預測。</div></div>
+  </section>
+  <div class="foot">資料來源：使用者提供之《2026-1119-彬台台北2026檢討2027目標_表格優化_v2(1).pptx》。本儀表板為管理摘要，數字四捨五入顯示；明細仍以原簡報為準。</div>
+</main>
+<script>
+  const search = document.getElementById('search');
+  const cards = [...document.querySelectorAll('.card')];
+  const headingIcons = {
+    '2026 年度目標進度':'📈',
+    '2027 目標配置':'🎯',
+    '客戶集中度':'🧑‍🤝‍🧑',
+    '費用使用率':'💰',
+    '專案機會池':'📦',
+    '2026 年 1–10 月業務單位檢視':'📊',
+    '管理重點':'🧭',
+    '資料界線':'📋'
+  };
+  document.querySelectorAll('.card h2').forEach(heading => {
+    const icon = headingIcons[heading.textContent.trim()];
+    if (icon) heading.insertAdjacentText('afterbegin', icon + ' ');
+  });
+  cards.forEach(card => {
+    card.addEventListener('pointerenter', () => card.classList.add('is-hovered'));
+    card.addEventListener('pointerleave', () => card.classList.remove('is-hovered'));
+  });
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    cards.forEach(card => { card.style.display = !q || card.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+  });
+</script>
+</body></html>
