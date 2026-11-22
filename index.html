@@ -48,6 +48,8 @@ td{padding:13px 12px}
 .creator-credit{flex:0 0 auto;color:#f5fff9;font-size:12pt;font-weight:700;white-space:nowrap;text-align:right;text-shadow:0 2px 8px #00141e}
 @media(max-width:700px){.hero-title-row{align-items:flex-end;gap:14px}.creator-credit{font-size:12pt}}
 @media(max-width:560px){.hero-title-row{display:block}.creator-credit{text-align:right;margin:-4px 0 14px}}
+.creator-credit{position:relative;padding-bottom:3px}
+.creator-credit::after{content:"";position:absolute;left:0;right:-2cm;bottom:0;height:1px;background:currentColor;opacity:.9}
 
 
 /* Place creator credit immediately after the main title */
