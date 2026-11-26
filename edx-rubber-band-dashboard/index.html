@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EDX 橡皮筋液化客訴事件調查儀表板">
+  <title>EDX｜橡皮筋液化客訴事件儀表板</title>
+  <link rel="stylesheet" href="styles.css?v=20261126-style7">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="EDX 品質管理">
+      <img class="brand-mark" src="assets/edx-logo.png" alt="edx logo">
+      <span>品質異常調查</span>
+    </div>
+    <div class="header-meta">
+      <span>負責窗口：Jacky／品管</span>
+      <span>資料截點：2026-11-25</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">RUBBER BAND LIQUEFACTION · COMPLAINT REVIEW</p>
+        <h1>橡皮筋液化／流湯異常<br>事件調查儀表板</h1>
+        <p class="hero-copy">彙整 189 封原始郵件，將客戶反映、業務轉述、品管觀察與供應商說法分層呈現。可能原因均屬待驗證研判，不視為已完成根因分析。</p>
+      </div>
+      <div class="hero-stamp">
+        <strong>內部品質文件</strong>
+        <span>CONFIDENTIAL</span>
+      </div>
+    </section>
+
+    <section class="notice" aria-label="閱讀提醒">
+      <strong>判讀原則</strong>
+      <span>有客戶原信時採原信日期；僅有 EDX 轉報時採首次轉報日；內部攔截採實際驗貨日。出貨日期、客戶實際發現日期若未見原始紀錄，標示待確認。矛盾資料保留原貌，不擅自選邊。</span>
+    </section>
+
+    <section class="kpis" id="kpis" aria-label="事件摘要"></section>
+
+    <section class="panel pattern-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CROSS-EVENT SIGNALS</p>
+          <h2>跨事件共通訊號</h2>
+        </div>
+        <span class="badge danger">根因尚未結案</span>
+      </div>
+      <div class="pattern-grid">
+        <article><span class="pattern-no">01</span><h3>顏色集中</h3><p>多起客訴明確指向綠色橡皮筋；Miniland 後續全檢另發現紅色 2 包液化，日曬測試另見白色變黏。</p></article>
+        <article><span class="pattern-no">02</span><h3>配方假說</h3><p>2023 年上游回覆稱為降低黏性由粉改加油，並「猜測」棕櫚油安定性不足可能導致液化；尚未見配方、批號與實驗報告支持。</p></article>
+        <article><span class="pattern-no">03</span><h3>老化／環境說法</h3><p>少年 2026 年主張自然老化週期約 8–12 個月、溫濕度會加速熔化沾黏；但各案缺少精確製造日、批號及倉儲條件，尚不能用此說法判定責任。</p></article>
+        <article><span class="pattern-no">04</span><h3>追溯缺口</h3><p>多次要求批號、進料日期、數量、檢驗紀錄與保存條件，但現有郵件未形成完整批次—客戶—出貨追溯鏈。</p></article>
+      </div>
+    </section>
+
+    <section class="panel audit-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">SECOND-PASS AUDIT</p><h2>內容與對應關係複核</h2></div>
+        <span class="badge pending">已再查 189 封郵件</span>
+      </div>
+      <div class="audit-grid">
+        <article><strong>事件完整性</strong><p>確認為 5 起國外客戶客訴＋1 起出貨前內部攔截。另有 2023-08-08 全公司暫停相關品項出貨通知，以及 2026-11-25 北福／工廠調查信；兩者是跨案處置，不另計客訴。</p></article>
+        <article><strong>日期規則</strong><p>Wiemann 改採客戶原信 2026-07-22（EDX 7/23 轉辦）；US TOY 採客戶原信 2026-10-29（EDX 10/30 轉辦）；S&amp;S 採 9/4 實際驗貨日。</p></article>
+        <article><strong>數量矛盾</strong><p>S&amp;S 有 84 組與 6 箱／144 片兩種記錄；Wiemann 有 2,436／2,346 組兩種記錄；均保留並標示待校正。</p></article>
+        <article><strong>補貨關係</strong><p>Miniland 除 7 月確認 550 組外，12/14 又要求 100 組；Wiemann 10 月由替換橡皮筋方案轉為要求約 2,000 組完整新品。</p></article>
+        <article><strong>照片來源</strong><p>9 張圖片與 1 支影片均已用 SHA-256 對回原始郵件附件；Miniland、EAI、MLC、S&amp;S、Wiemann、US TOY 各自對應，未跨案誤置。</p></article>
+        <article><strong>供應鏈界線</strong><p>少年回覆可直接對應 Miniland、EAI、S&amp;S、MLC、Wiemann；北福截至資料截點未見正式原因回覆。US TOY 舊批供應商仍待批號證明，新 240 組才明確為東幸＋北福。</p></article>
+      </div>
+    </section>
+
+    <section class="panel controls-panel" aria-label="篩選工具">
+      <label class="search-box">
+        <span>搜尋事件</span>
+        <input id="search" type="search" placeholder="客戶、品號、業務、異常關鍵字…">
+      </label>
+      <label><span>事件類型</span><select id="typeFilter"><option value="all">全部</option><option value="客戶客訴">客戶客訴</option><option value="內部攔截">內部攔截</option></select></label>
+      <label><span>供應鏈</span><select id="supplierFilter"><option value="all">全部</option><option value="少年玩具">少年玩具</option><option value="北福">北福</option></select></label>
+      <label><span>業務人員</span><select id="salesFilter"><option value="all">全部</option></select></label>
+      <button id="resetFilters" type="button">清除篩選</button>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">EVENT TIMELINE</p><h2>事件時間軸</h2></div>
+        <span id="resultCount" class="count-label"></span>
+      </div>
+      <div id="timeline" class="timeline"></div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">CASE REGISTER</p><h2>事件表格彙整</h2></div>
+        <p class="section-note">點選「查看」展開完整證據與待確認事項</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>日期／類型</th><th>客戶／業務</th><th>品號／產品</th><th>釘板／顏色</th><th>數量</th><th>供應鏈</th><th>異常摘要</th><th></th></tr></thead>
+          <tbody id="caseRows"></tbody>
+        </table>
+      </div>
+      <div id="caseDetail" class="case-detail" hidden></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">SUPPLIER RESPONSES</p><h2>供應商重點回覆</h2></div></div>
+      <div class="supplier-grid">
+        <article class="supplier-card youth">
+          <div class="supplier-title"><span>YOUTH</span><h3>少年玩具</h3></div>
+          <ul>
+            <li><strong>2023-07：</strong>抽驗釘板 200 片、橡皮筋 500 包及綠色材料 12 kg，未發現液化；越南橡皮筋廠稱配方與製程未改變並將研究。</li>
+            <li><strong>2023-08：</strong>上游說明由粉改加油降低黏性，並猜測棕櫚油安定性不足可能造成液化；此為猜測，非驗證結論。</li>
+            <li><strong>2024-05：</strong>稱 2023 年底已做庫存拉力重檢；200°C 熱風直吹 60 秒未融化，線上全數檢視未見不良，並交付 MLC 補貨 100 袋。</li>
+            <li><strong>2026-07：</strong>對 Wiemann 主張橡皮筋自然老化週期約 8–12 個月、倉儲溫濕度會加速劣化；先稱可補貨，後以出貨逾 1.5 年拒絕整批補貨。</li>
+          </ul>
+        </article>
+        <article class="supplier-card northfu">
+          <div class="supplier-title"><span>NORTH FU</span><h3>北福</h3></div>
+          <ul>
+            <li><strong>供應關係：</strong>2026 年少年停業後的內部更新指出，東幸生產的 5 吋、20 cm、27 cm 釘板原由少年向北福採購橡皮筋後供料，後改為東幸直接向北福採購。</li>
+            <li><strong>現有回覆：</strong>目前資料中未找到北福針對液化原因的書面答覆。</li>
+            <li><strong>2026-11-25：</strong>EDX 已發出調查，要求確認過往是否見過液化、取得來源、現有庫存／批號與最久／底層庫存抽驗；截至資料截點尚待回覆。</li>
+          </ul>
+          <p class="pending">待補證：北福正式回覆、COA／配方版本、批號與留樣檢驗結果</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">PHOTO EVIDENCE · TRACEABILITY</p><h2>重點照片與事件對應</h2></div><p class="section-note">每張媒體均標示事件、日期、原始附件、可觀察現象與判讀界線；點擊可放大</p></div>
+      <div id="gallery" class="gallery"></div>
+    </section>
+
+    <section class="panel action-panel">
+      <div class="section-heading"><div><p class="eyebrow">OPEN ITEMS</p><h2>Jacky 後續調查清單</h2></div></div>
+      <div class="action-grid">
+        <article><h3>批次追溯</h3><p>建立北福／少年進料批號、進料日期、配方版次、包裝工廠、EDX 訂單及客戶出貨的對照表。</p></article>
+        <article><h3>留樣與加速試驗</h3><p>依顏色分層留樣，設定溫濕度、光照、密封塑袋與時間條件；避免以 200°C 熱風 60 秒作為長期老化的替代證據。</p></article>
+        <article><h3>矛盾資料校正</h3><p>確認 Wiemann 正確品號 20120／20210、數量 2,436／2,346；另核對 S&amp;S 訂單 84 組與品檢 144 片的差異。</p></article>
+        <article><h3>供應商 8D／CAPA</h3><p>要求北福與少年（或承接廠）提出可驗證的根因、圍堵、永久改善、成效驗證及防再發證據。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>EDX 品質管理內部使用 · 依目前資料彙整，非最終責任判定</footer>
+
+  <dialog id="mediaDialog">
+    <button id="closeDialog" class="dialog-close" aria-label="關閉">關閉</button>
+    <div id="dialogMedia"></div>
+    <div id="dialogCaption" class="dialog-caption"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
